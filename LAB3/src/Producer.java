@@ -5,7 +5,7 @@ public class Producer implements Runnable{
     }
 
     public void run(){
-        while (true){
+        for (int i = 0; i < 1000; i++){
             data.produce();
         }
     }

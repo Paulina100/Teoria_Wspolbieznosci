@@ -2,8 +2,8 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Data {
-    public int bufor = 0;
-    public int buforSize = 5;
+    public int buforCurr = 0;
+    public int buforSize = 100;
     ReentrantLock lock = new ReentrantLock();
     Condition buforEmpty = lock.newCondition();
     Condition buforFull = lock.newCondition();
@@ -14,10 +14,10 @@ public class Data {
     }
 
     public void produce(){
-        int portion = getRandomNumber(0, buforSize);
+        int portion = getRandomNumber(1, buforSize/2);
 
         lock.lock();
-        while(bufor + portion <= buforSize){
+        while(buforCurr + portion > buforSize){
             try {
                 buforFull.await();
             } catch (InterruptedException e) {
@@ -25,25 +25,27 @@ public class Data {
             }
         }
 
-        bufor += 1;
+        buforCurr += portion;
         buforEmpty.signal();
         lock.unlock();
-        System.out.println("produced");
+        System.out.println("Produced\tPortion= " + portion);
     }
 
     public void consume(){
-        try {
-            lock.lock();
-            while(bufor == 0){
+        int portion = getRandomNumber(1, buforSize/2);
+
+        lock.lock();
+        while(buforCurr - portion < 0){
+            try {
                 buforEmpty.await();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
 
-        bufor -= 1;
+        buforCurr -= 1;
         buforFull.signal();
         lock.unlock();
-        System.out.println("consumed");
+        System.out.println("Consumed\tPortion= " + portion);
     }
 }
