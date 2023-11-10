@@ -1,4 +1,10 @@
+.idea
 */.gradle
 */.idea
 */build
 */gradle
+*/build
+*/build.gradle
+*/gradlew
+*/gradlew.bat
+*/settings.gradle
