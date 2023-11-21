@@ -5,6 +5,7 @@ public class Monitor {
     public int currBufor = 0;
     public int maxPortion = 10;
     public int maxBufor = 2 * maxPortion;
+    public int[] consumers = {0, 0, 0, 0, 0, 0};
 
     ReentrantLock lock = new ReentrantLock();
     Condition buforEmptyCondition = lock.newCondition();
@@ -15,8 +16,6 @@ public class Monitor {
     }
 
     public void produce(int id, int portion){
-//        int portion = getRandomNumber(1, maxPortion);
-
         lock.lock();
         while (currBufor + portion > maxBufor){
             try {
@@ -27,14 +26,11 @@ public class Monitor {
         }
         buforEmptyCondition.signal();
         currBufor += portion;
-        System.out.println("Produced ID: " + id + " Portion: " + portion);
 
         lock.unlock();
     }
 
     public void consume(int id, int portion){
-//        int portion = getRandomNumber(1, maxPortion);
-
         lock.lock();
         while (currBufor - portion < 0){
             try {
@@ -45,7 +41,15 @@ public class Monitor {
         }
         buforFullCondition.signal();
         currBufor -= portion;
-        System.out.println("Consumed ID: " + id + " Portion: " + portion);
+        consumers[id] ++;
+        System.out.print("Consumers: [");
+        for (int i = 0; i < consumers.length; i++) {
+            System.out.print(consumers[i]);
+            if (i < consumers.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
         lock.unlock();
     }
 }
