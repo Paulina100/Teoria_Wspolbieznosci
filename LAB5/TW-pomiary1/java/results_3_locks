@@ -1,0 +1,91 @@
+1 experiment: (Porównanie czasów dla różnej ilości operaji)
+
+int noProducers = 5;
+int noConsumers = 5;
+int maxPortion = 10;
+generator = Math.random()
+noOperations = ["10^4", "10^5", "5*10^5" "10^6", "5*10^6", "10^7"]
+
+
+10^4 = [72, 73, 46, 51, 69, 46, 126, 47, 50, 68]
+cpu = [-78, -93, -15, -78, -46, -15, -62, -62, -78, -78]
+
+10^5 = [444, 400, 375, 425, 422]
+cpu = [-31, -31, 0, -15, 0]
+
+5 * 10^5 = [1891, 1843, 1840, 1773, 1739]
+cpu = [343, 234, 375, 343, 375]
+
+10^6 = [3468, 3367, 3283, 3413, 3313]
+cpu = [640, 859, 906, 687, 718]
+
+5 * 10^6 = [16177, 16223, 16135, 16002, 15981]
+cpu = [3218, 4015, 3421, 3312, 3171]
+
+10^7 = [38651, 35304, 33671, 33868, 35264]
+cpu = [8640, 8546, 7625, 8203, 8171]
+
+
+2 experyment (Porównanie czasów dla różnych generatorów liczb losowych):
+
+int noProducers = 5;
+int noConsumers = 5;
+int maxPortion = 10;
+noOperations = 5 * 10^5
+
+generators = [Math.random(), java.util.Random()]
+
+math = [1891, 1843, 1840, 1773, 1739]
+cpu = [343, 234, 375, 343, 375]
+
+java = [2174, 1914, 1978, 2035, 1970]
+cpu = [421, 328, 359, 421, 328]
+
+
+
+3 experyment (Porównanie czasów dla różnych ilości wątków):
+
+int noProducers = 5;
+int noConsumers = 5;
+int maxPortion = 10;
+noOperations = 5 * 10^5
+generator = Math.random()
+
+threads = [2, 6, 10, 50, 100, 500, 1000]
+
+2_threads = [1716, 1670, 1592, 1705, 1665]
+cpu = [734, 828, 703, 812, 625]
+
+6_threads = [1761, 1807, 1659, 1730, 1699]
+cpu = [640, 578, 500, 593, 562]
+
+10_threads = [1891, 1843, 1840, 1773, 1739]
+cpu = [343, 234, 375, 343, 375]
+
+50_threads = [6869, 6753, 6702, 6673, 6732]
+cpu = [109, 125, 31, 406, 140]
+
+100_threads = [6936, 6757, 6786, 6737, 7109]
+cpu = [125, 15, 46, 359, -15]
+
+500_threads = [7475, 7377, 7306, 7368, 7438]
+cpu = [62, 46, -78, 187, 15]
+
+1000_threads = [7809, 8865, 7541, 7603, 7597]
+cpu = [406, -93, 46, 390, 218]
+
+4 experyment (wielkość bufora):
+
+int noProducers = 5;
+int noConsumers = 5;
+int maxPortion = 10;
+noOperations = 5 * 10^5
+generator = Math.random()
+
+bufor_size = [20, 200]
+
+20_bufor = [1891, 1843, 1840, 1773, 1739]
+cpu = [343, 234, 375, 343, 375]
+
+200_bufor = [199, 161, 156, 182, 171]
+cpu = [-78, -31, -46, -62, -46]

@@ -14,7 +14,7 @@ public class Consument implements Runnable{
     }
 
     public void run(){
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 100000; i++) {
             monitor.consume(this.id, this.portion);
         }
     }

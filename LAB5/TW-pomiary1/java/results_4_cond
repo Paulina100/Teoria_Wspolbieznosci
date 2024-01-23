@@ -1,0 +1,90 @@
+1 experiment: (Porównanie czasów dla różnej ilości operaji)
+
+int noProducers = 5;
+int noConsumers = 5;
+int maxPortion = 10;
+generator = Math.random()
+noOperations = ["10^4", "10^5", "5*10^5" "10^6", "5*10^6", "10^7"]
+
+10^4 = [58, 47, 72, 52, 46]
+cpu = [-46, -31, -78, -78, -62]
+
+10^5 = [1475, 1357, 1320, 1340, 1338]
+cpu = [140, 46, 15, 171, 62]
+
+5 * 10^5 = [6576, 6579, 6430, 6384, 6588]
+cpu = [500, 593, 500, 609, 578]
+
+10^6 = [13288, 12784, 13078, 12894]
+cpu = [1171, 1000, 1187, 1234, 12702, 1125]
+
+5 * 10^6 = [63436, 66268, 70651, 65756, 63667]
+cpu = [5359, 5937, 6953, 6234, 5937]
+
+10^7 = [134730, 132845, 129813, 131231, 132986]
+CPU = [11750, 12578, 12890, 12187, 12328]
+
+
+2 experyment (Porównanie czasów dla różnych generatorów liczb losowych):
+
+int noProducers = 5;
+int noConsumers = 5;
+int maxPortion = 10;
+noOperations = 5 * 10^5
+
+generators = [Math.random(), java.util.Random()]
+
+math = [6576, 6579, 6430, 6384, 6588]
+cpu = [500, 593, 500, 609, 578]
+
+java = [6847, 6740, 6752, 6768, 6749]
+cpu = [578, 703, 562, 375, 312]
+
+
+
+3 experyment (Porównanie czasów dla różnych ilości wątków):
+
+int noProducers = 5;
+int noConsumers = 5;
+int maxPortion = 10;
+noOperations = 5 * 10^5
+generator = Math.random()
+
+threads = [2, 6, 10, 50, 100, 500, 1000]
+
+2_threads = [1685, 1584, 1601, 1650, 1636]
+cpu = [750, 546, 609, 718, 703]
+
+6_threads = [5046, 4820, 4799, 4876, 4769]
+cpu = [812, 718, 625, 750, 734]
+
+10_threads = [6576, 6579, 6430, 6384, 6588]
+cpu = [500, 593, 500, 609, 578]
+
+50_threads = [6693, 6778, 6654, 6844, 6788]
+cpu = [281, 265, 78, 187, 328]
+
+100_threads = [7194, 6779, 6813, 6979, 6755]
+cpu = [31, 390, 31, -31, 468]
+
+500_threads = [7418, 7479, 7332, 7284, 7291]
+cpu = [46, 31, 156, 453, 78]
+
+1000_threads = [7681, 7878, 7548, 7526, 7706]
+cpu = [390, -46, 31, 62, 156]
+
+4 experyment (wielkość bufora):
+
+int noProducers = 5;
+int noConsumers = 5;
+int maxPortion = 10;
+noOperations = 5 * 10^5
+generator = Math.random()
+
+bufor_size = [20, 200]
+
+20_bufor = [6576, 6579, 6430, 6384, 6588]
+cpu = [500, 593, 500, 609, 578]
+
+200_bufor = [1383, 1366, 1413, 1366, 1377]
+cpu = [15, 0, 0, -31, 0]

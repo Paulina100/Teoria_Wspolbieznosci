@@ -1,11 +1,11 @@
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Monitor {
+public class Monitor4Cond implements Monitor{
     public int currBufor = 0;
-    public int maxPortion;
-    public int maxBufor;
-    public int[] consumers = {0, 0, 0, 0, 0, 0};
+    public final int maxPortion;
+    public final int maxBufor;
+    private final Counter operationsCounter;
 
     ReentrantLock lock = new ReentrantLock();
     Condition firstProducer = lock.newCondition();
@@ -13,18 +13,24 @@ public class Monitor {
     Condition firstConsumer = lock.newCondition();
     Condition restConsumers = lock.newCondition();
 
-    Monitor(int maxPortion){
+    boolean firtProducerWaits = false;
+    boolean firtConsumerWaits = false;
+
+    Monitor4Cond(int maxPortion, Counter operationsCounter){
         this.maxPortion = maxPortion;
         this.maxBufor = maxPortion * 2;
+        this.operationsCounter = operationsCounter;
     }
 
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
-    public void produce(int id, int portion){
+    public void produce(){
+        int portion = getRandomNumber(1, maxPortion);
+
         lock.lock();
-        while (lock.hasWaiters(firstProducer)){
+        while (firtProducerWaits){
             try {
                 restProducers.await();
             } catch (InterruptedException e) {
@@ -34,28 +40,28 @@ public class Monitor {
 
         while (maxBufor - currBufor < portion){
             try {
+                firtProducerWaits = true;
                 firstProducer.await();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         currBufor += portion;
+        operationsCounter.add();
 
+        firtProducerWaits = false;
         restProducers.signal();
         firstConsumer.signal();
 
         lock.unlock();
     }
 
-    public void consume(int id, int portion){
+    public void consume(){
+        int portion = getRandomNumber(1, maxPortion);
+
         lock.lock();
-        while (lock.hasWaiters(firstConsumer)){
+        while (firtConsumerWaits){
             try {
                 restConsumers.await();
             } catch (InterruptedException e) {
@@ -65,28 +71,17 @@ public class Monitor {
 
         while (currBufor < portion){
             try {
+                firtConsumerWaits = true;
                 firstConsumer.await();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         currBufor -= portion;
-        consumers[id] ++;
-        System.out.print("Consumers: [");
-        for (int i = 0; i < consumers.length; i++) {
-            System.out.print(consumers[i]);
-            if (i < consumers.length - 1) {
-                System.out.print(", ");
-            }
-        }
-        System.out.println("]");
+        operationsCounter.add();
 
+        firtConsumerWaits = false;
         restConsumers.signal();
         firstProducer.signal();
 

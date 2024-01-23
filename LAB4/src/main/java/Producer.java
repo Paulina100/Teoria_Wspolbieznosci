@@ -14,7 +14,7 @@ public class Producer implements Runnable{
     }
 
     public void run(){
-        for (int i = 0; i < 11000000; i++) {
+        for (int i = 0; i < 1100000; i++) {
             monitor.produce(this.id, this.portion);
         }
     }

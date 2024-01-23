@@ -1,0 +1,130 @@
+Buffer = 10
+Productions = 1000
+Wait = None
+
+Total runtime average: 192 ms
+Producer 1 total wait time average: 159 ms
+Producer 2 total wait time average: 159 ms
+Consumer 1 total wait time average: 154 ms
+Consumer 2 total wait time average: 155 ms
+Buffer 1 total wait time average: 163 ms
+Buffer 2 total wait time average: 163 ms
+
+Consumer 1 count average: 1002
+Consumer 2 count average: 997
+
+///////////////////////////
+Buffer = 10
+Productions = 10000
+Wait = None
+
+TTotal runtime average: 1713 ms
+ Producer 1 total wait time average: 1441 ms
+ Producer 2 total wait time average: 1442 ms
+ Consumer 1 total wait time average: 1398 ms
+ Consumer 2 total wait time average: 1401 ms
+ Buffer 1 total wait time average: 1483 ms
+ Buffer 2 total wait time average: 1478 ms
+
+ Consumer 1 count average: 10007
+ Consumer 2 count average: 9991
+
+////////////////////////
+Buffer = 10
+Productions = 1000
+Sleep = 1 ms
+
+Total runtime average: 4599 ms
+Producer 1 total wait time average: 2298 ms
+Producer 2 total wait time average: 2388 ms
+Consumer 1 total wait time average: 2310 ms
+Consumer 2 total wait time average: 2399 ms
+Buffer 1 total wait time average: 325 ms
+Buffer 2 total wait time average: 404 ms
+
+Consumer 1 count average: 1028
+Consumer 2 count average: 969
+
+//////////////////////
+Buffer = 10
+Productions = 10000
+Sleep = 1 ms
+
+Total runtime average: 45633 ms
+Producer 1 total wait time average: 23009 ms
+Producer 2 total wait time average: 23733 ms
+Consumer 1 total wait time average: 22828 ms
+Consumer 2 total wait time average: 23742 ms
+Buffer 1 total wait time average: 3195 ms
+Buffer 2 total wait time average: 4024 ms
+
+Consumer 1 count average: 10195
+Consumer 2 count average: 9805
+
+
+////////////////////////////////////////////
+Buffer = 2
+Productions = 1000
+Wait = None
+
+Total runtime average: 203 ms
+Producer 1 total wait time average: 169 ms
+Producer 2 total wait time average: 169 ms
+Consumer 1 total wait time average: 163 ms
+Consumer 2 total wait time average: 164 ms
+Buffer 1 total wait time average: 173 ms
+Buffer 2 total wait time average: 172 ms
+
+Consumer 1 count average: 1002
+Consumer 2 count average: 999
+
+//////////////////////////
+Buffer = 2
+Productions = 10000
+Wait = None
+
+Total runtime average: 1772 ms
+Producer 1 total wait time average: 1491 ms
+Producer 2 total wait time average: 1491 ms
+Consumer 1 total wait time average: 1445 ms
+Consumer 2 total wait time average: 1445 ms
+Buffer 1 total wait time average: 1534 ms
+Buffer 2 total wait time average: 1530 ms
+
+Consumer 1 count average: 10003
+Consumer 2 count average: 9998
+
+
+////////////////////////
+
+Buffer = 2
+Productions = 1000
+Sleep = 1 ms
+
+Total runtime average: 4688 ms
+Producer 1 total wait time average: 2343 ms
+Producer 2 total wait time average: 2430 ms
+Consumer 1 total wait time average: 2356 ms
+Consumer 2 total wait time average: 2422 ms
+Buffer 1 total wait time average: 293 ms
+Buffer 2 total wait time average: 358 ms
+
+Consumer 1 count average: 1002
+Consumer 2 count average: 999
+
+////////////////////////////
+
+Buffer = 2
+Productions = 10000
+Sleep = 1 ms
+
+Total runtime average: 46598 ms
+Producer 1 total wait time average: 23369 ms
+Producer 2 total wait time average: 24254 ms
+Consumer 1 total wait time average: 23396 ms
+Consumer 2 total wait time average: 24116 ms
+Buffer 1 total wait time average: 3131 ms
+Buffer 2 total wait time average: 3821 ms
+
+Consumer 1 count average: 10257
+Consumer 2 count average: 9745
